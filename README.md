@@ -169,7 +169,7 @@ masterに複数のコミットをしてしまった場合はその回数分だ�
 
 ## 参考ページ
 
-[Git初心者が絶対に覚えておくべきコマンド - idesaku blog](http://d.hatena.ne.jp/idesaku/20091106/1257507849)
-[gitで一度行った変更をなかったことにする方法4つ - TIM Labs](http://labs.timedia.co.jp/2011/02/git-various-undo.html)
-[gitでアレを元に戻す108の方法 - TIM Labs](http://labs.timedia.co.jp/2011/08/git-undo-999.html)
+- [Git初心者が絶対に覚えておくべきコマンド - idesaku blog](http://d.hatena.ne.jp/idesaku/20091106/1257507849)
+- [gitで一度行った変更をなかったことにする方法4つ - TIM Labs](http://labs.timedia.co.jp/2011/02/git-various-undo.html)
+- [gitでアレを元に戻す108の方法 - TIM Labs](http://labs.timedia.co.jp/2011/08/git-undo-999.html)
 
