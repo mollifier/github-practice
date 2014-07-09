@@ -76,3 +76,87 @@ PullRequestをmasterにマージして、というのを繰り返すと、ロー
 % git branch -d 削除したいブランチ名
 ```
 
+## 間違いから復旧する系の操作
+
+### addを取り消したい
+
+```
+# addしたものが全部取り消されて、修正をまだaddしていない状態に戻る
+% git reset HEAD
+
+# 一部のファイルだけaddを取り消す場合
+% git reset HEAD file
+```
+
+
+### コミットしていない修正を取り消したい
+
+ローカルで修正を行っていたが、間違えていたので修正を取り消したいときはこうする。
+svnのrevertに相当する操作。
+これをすると、add済のものもそうでないものも含めて、コミットしていない変更がすべてなくなる。
+
+```
+% git checkout HEAD .
+# または
+% git reset --hard HEAD
+```
+
+### ブランチを切らずにmasterで作業したが、やっぱりブランチを作りたい
+
+ブランチを切って作業したかったのに間違ってmasterにコミットしてしまったときはこうやって元に戻す。
+本当はfeatureブランチを作ってそこにコミットしたかったのに、間違えてmasterにコミットしてしまったのを復旧させる例。
+
+```
+# 今masterにいて、まちがって1つコミットしてしまったとする
+# 今のmasterの最新からブランチを作成する
+% git branch feature
+# この時点ではmasterとfeatureは一致している
+
+# masterのコミットを1つ取り消す。
+# これでmasterは1つ古くなる(1つコミットが減る)がfeatureはそのままなのでうまくいく
+% git reset --hard 'HEAD^'
+```
+
+masterに複数のコミットをしてしまった場合はその回数分だけ`^`を重ねる。
+例えば3回間違ってコミットした場合はこうする。
+
+```
+% git reset --hard 'HEAD^^^'
+```
+
+または`~n`を使っても良い。
+
+```
+% git reset 'HEAD~'
+
+# git reset --hard 'HEAD^^^'と同じ
+% git reset --hard 'HEAD~3'
+```
+
+### コミットするブランチを間違えた
+
+コミットするブランチを間違えた場合はこうやって復旧する。
+例えば、本当はfeature/1ブランチにコミットしたかったのに間違ってfeature/2ブランチにコミットしてしまった場合の復旧方法は以下。
+
+```
+# 今はfeature/2ブランチにいたとする
+# feature/2のコミットを1つ取り消す
+# --hardはつけていないので、作業コピーには修正は残っている
+% git reset 'HEAD^'
+
+# コミットしたいブランチに移動する
+# まだコミットしていない修正はブランチを移動してもついてくる
+% git checkout feature/2
+
+# 後は普通にコミットする
+% git add -u
+% git commit
+```
+
+
+## 参考ページ
+
+[Git初心者が絶対に覚えておくべきコマンド - idesaku blog](http://d.hatena.ne.jp/idesaku/20091106/1257507849)
+[gitで一度行った変更をなかったことにする方法4つ - TIM Labs](http://labs.timedia.co.jp/2011/02/git-various-undo.html)
+[gitでアレを元に戻す108の方法 - TIM Labs](http://labs.timedia.co.jp/2011/08/git-undo-999.html)
+
