@@ -17,7 +17,7 @@
 ```
 # まずはmasterブランチに移動する
 # その後、masterから新しいブランチを作成する
-% git co master
+% git checkout master
 % git branch b1
 
 # b1ブランチに移動する
@@ -44,5 +44,35 @@ edit
 % git add -u
 % git commit
 % git push origin b1
+```
+
+## 普通に必要になる操作
+
+### リモートリポジトリのmasterをローカルリポジトリのmasterに反映させる
+
+PullRequestをマージするとGitHubのリポジトリのmasterが進んでいく。
+それをローカルに取り込むときはこうする。
+
+```
+# 方法1
+% git checkout master
+% git pull origin master
+
+# 方法2
+% git checkout master
+% git fetch origin
+% g merge origin/master
+```
+
+### PullRequestをマージ済のブランチがいらないので消したい
+
+PullRequestをmasterにマージして、というのを繰り返すと、ローカルにマージ済ブランチがいっぱい溜まってくる。
+それがうっとおしいと思うときはこうやって削除する。
+
+```
+# マージ済ブランチ一覧を表示する
+% git branch --merged
+# 削除する
+% git branch -d 削除したいブランチ名
 ```
 
