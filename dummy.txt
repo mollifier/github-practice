@@ -2,3 +2,6 @@
 
 <script>alert("XSS");</script>
 ' or 1=1--
+
+'; select * from UserAccount;
+
