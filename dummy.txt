@@ -5,3 +5,4 @@
 
 '; select * from UserAccount;
 
+＊この行はpra1ブランチで % git merge origin/pra1 した後にさらに追加した行＊
